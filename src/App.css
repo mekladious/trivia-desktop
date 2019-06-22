@@ -8,12 +8,12 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   /* color: white; */
-  background:  url('./img/background4.png');
+  /* background:  url('./img/background4.png'); */
   background-size: cover; /* or contain depending on what you want */
   background-position: center center;
   background-repeat: no-repeat;
   font-family: 'Trebuchet MS';
-  color: white;
+  color: #2D2926FF;
 }
 
 .app-slide{
@@ -70,6 +70,11 @@
 .image-container{
   width: 100%;
   height: 175px;
+}
+
+.welcome-logo{
+  width: 50%;
+  height: auto;
 }
 
 .Welcome p{

@@ -1,12 +1,41 @@
 import React from "react";
 import { withRouter,Link } from "react-router-dom";
-import { Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
+import posed from 'react-pose';
+import { tween, styler, easing } from 'popmotion';
+
+const Box = posed.div({
+    hidden: {opacity: 0 },
+    visible: {opacity: 1, transition: {duration: 5000 } }
+  });
 
 class Welcome extends React.Component {
 
+    state = { isVisible: false };
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({ isVisible: !this.state.isVisible });
+                setTimeout(() => {
+                    const divStyler = styler(document.querySelector('#box'));
+                    tween({from: 0,
+                        to: { x: -280, y:-280},
+                        duration: 1000,
+                        ease: easing.backOut,
+                    }).start(divStyler.set);
+                }, 3000);
+        }, 2000);
+        
+    }
     render() {
+        const { isVisible } = this.state;
         return(
-            <div className="Welcome app-slide">
+            <Box id="box" pose={isVisible ? 'visible' : 'hidden'}>
+                <div className="image-container">
+                    <img class="welcome-logo" alt="" src={require('../../img/logo.png')}  />
+                </div>
+            </Box>
+           /* <div className="Welcome app-slide">
                 <div className="image-container">
                     <img alt="" src={require('../../img/logo.png')}  />
                 </div>
@@ -17,7 +46,7 @@ class Welcome extends React.Component {
                         PRESS TO START
                     </Button>
                     </Link>
-            </div>
+            </div>*/
         )
     }
     
