@@ -9,32 +9,52 @@ const Box = posed.div({
     visible: {opacity: 1, transition: {duration: 5000 } }
   });
 
+const Content = posed.div({
+    hidden: {opacity: 0 },
+    visible: {opacity: 1, transition: {duration: 1000 } }
+  });
+
 class Welcome extends React.Component {
 
-    state = { isVisible: false };
+    state = { boxIsVisible: false, contentIsVisible: false };
 
     componentDidMount() {
         setTimeout(() => {
-            this.setState({ isVisible: !this.state.isVisible });
+            this.setState({ boxIsVisible: !this.state.boxIsVisible });
                 setTimeout(() => {
                     const divStyler = styler(document.querySelector('#box'));
                     tween({from: 0,
-                        to: { x: -280, y:-280},
+                        to: { x: -450, y:-280},
                         duration: 1000,
                         ease: easing.backOut,
                     }).start(divStyler.set);
+                    setTimeout(() => {
+                        this.setState({ contentIsVisible: !this.state.contentIsVisible });
+                    }, 500);
                 }, 3000);
         }, 2000);
         
     }
     render() {
-        const { isVisible } = this.state;
+        const { boxIsVisible } = this.state;
+        const { contentIsVisible } = this.state;
         return(
-            <Box id="box" pose={isVisible ? 'visible' : 'hidden'}>
-                <div className="image-container">
-                    <img class="welcome-logo" alt="" src={require('../../img/logo.png')}  />
-                </div>
-            </Box>
+            <div className="page-container">
+                <Box id="box" pose={boxIsVisible ? 'visible' : 'hidden'}>
+                    <div className="image-container">
+                        <img class="welcome-logo" alt="" src={require('../../img/logo.png')}  />
+                    </div>
+                </Box>
+                <Content className="content-container" pose={contentIsVisible ? 'visible' : 'hidden'}>
+                    <p>Welcome to trivia app</p>
+                    <h6>aucibus rem.</h6>
+                    <Link to="/settings">
+                    <Button variant="primary" >
+                        PRESS TO START
+                    </Button>
+                    </Link>
+                </Content>
+             </div>
            /* <div className="Welcome app-slide">
                 <div className="image-container">
                     <img alt="" src={require('../../img/logo.png')}  />
