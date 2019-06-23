@@ -46,12 +46,12 @@ class Welcome extends React.Component {
                     </div>
                 </Box>
                 <Content className="content-container" pose={contentIsVisible ? 'visible' : 'hidden'}>
-                    <p>Welcome to trivia app</p>
-                    <h6>aucibus rem.</h6>
-                    <Link to="/settings">
-                    <Button variant="primary" >
+                    <p>Welcome to our Trivia Activity</p>
+                    
+                    <Link className="start-button" to="/settings">
+                    
                         PRESS TO START
-                    </Button>
+                    
                     </Link>
                 </Content>
              </div>
