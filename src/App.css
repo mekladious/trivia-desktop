@@ -177,3 +177,32 @@
   font-size: 20px;
 }
 
+ .team-name{
+  max-width: 40%;
+  float: left;
+}
+
+ .team-score{
+  max-width: 40%;
+  float: right;
+}
+
+.question{
+  color: black;
+  width: 70%;
+  text-align: center;
+  margin: auto auto;
+  background: white;
+  padding: 5px;
+  border-radius: 35px;
+}
+.choice {
+  color: black;
+  width: 50%;
+  font-size: 16pt;
+  text-align: center;
+  margin: 30px auto;
+  background: white;
+  padding: 5px;
+  border-radius: 35px;
+}
