@@ -14,14 +14,14 @@ class GameSettings extends React.Component {
             teams_num: 1,
             rounds_num: 1,
             teams:[
-                ''
+                {name:'', score:0}
             ],
             allFieldsValid:false
         }
     }
     onTeamNameChange(event, index){
         let teams = this.state.teams
-        teams[index]=event.target.value
+        teams[index].name=event.target.value
         this.setState({teams: teams})
     }
 
@@ -34,7 +34,7 @@ class GameSettings extends React.Component {
         let teams_num = event.target.value;
         let old_num = teams.length;
         teams.length = teams_num;
-        teams.fill("", old_num);
+        teams.fill({name:'', score:0}, old_num);
         this.setState({teams_num: event.target.value, teams: teams})
     }
 
@@ -63,14 +63,14 @@ class GameSettings extends React.Component {
                         <label htmlFor="">Team ({index+1}) name *</label>
                         <br/>
                         <div className="input">
-                            <input type="text" name="" id="" value={team} onChange={(e)=>this.onTeamNameChange(e, index)} defaultValue="TeamName" required/>
+                            <input type="text" name="" id="" value={team.name} onChange={(e)=>this.onTeamNameChange(e, index)} defaultValue="TeamName" required/>
                         </div>
                     </div>
                 )}
                 <h6>(*) required fields</h6>
                
                 <Link to={{
-                    pathname: '/randomizer',
+                    pathname: '/round',
                     state: this.state
                 }}>
                     <div className="submitbutton">
