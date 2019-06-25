@@ -14,14 +14,15 @@
   background-repeat: no-repeat;
   font-family: 'Saira Semi Condensed', sans-serif;
   font-weight: 500;
-  color: #2D2926FF;
+  /* color: #2D2926FF; */
+  color: white;
 }
 
 .app-slide{
-  height: 80vh;
+  max-height: 70vh;
   max-width: 70%;
   /* opacity: 0.2; */
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #BF1E2D;
   border-radius: 15px;
 }
 
@@ -142,17 +143,30 @@
   max-width:70hw;
   text-align: left;
   padding: 80px;
+  overflow: scroll;
   /* display: flex; */
 }
 .Settings label{
   display: inline-block;
   font-size: 24px;
 }
+
+.Settings h6{
+  font-size: 12;
+  color: black;
+  bottom: 18%;
+}
+
 .Settings .submitbutton{
-  position: absolute;
   bottom: 18%;
   right: 15%;
+  width: 150px;
+  float: right;
+}
+.Settings .submitbutton button{
   font-size: 16px;
+  font-style: bold;
+  width: 100%;
 }
 
 .Settings .input{
