@@ -1,8 +1,10 @@
+
 import React from "react";
 import { withRouter } from "react-router-dom";
+import RandomRoller from 'react-random-roller';
 // import LuckyWheel from 'lucky-wheel';
 
-class Randomizer extends React.Component {
+class Randomizer1 extends React.Component {
 
     constructor(props) {
         super(props);
@@ -25,16 +27,9 @@ class Randomizer extends React.Component {
        
       render() {
         return (
-          {/* <LuckyWheel
-             onLoadData={this.handleLoadData}
-             position={this.state.position}
-             areaNum={7}
-             cycle={10}
-             isComplete={this.state.isComplete}
-             onComplete={this.handleComplete}
-          /> */}
+          <RandomRoller fps={10} list={ ['Hello,', 1, <p>world</p>] }/>
         )
       }
 }
 
-export default withRouter(Randomizer);
+export default withRouter(Randomizer1);
