@@ -24,7 +24,7 @@ class Welcome extends React.Component {
                 setTimeout(() => {
                     const divStyler = styler(document.querySelector('#box'));
                     tween({from: 0,
-                        to: { x: -450, y:-280},
+                        to: { x: -450, y:-260},
                         duration: 1000,
                         ease: easing.backOut,
                     }).start(divStyler.set);
@@ -42,17 +42,22 @@ class Welcome extends React.Component {
             <div className="page-container">
                 <Box id="box" pose={boxIsVisible ? 'visible' : 'hidden'}>
                     <div className="image-container">
-                        <img class="welcome-logo" alt="" src={require('../../img/logo.png')}  />
+                        <img className="welcome-logo" alt="" src={require('../../img/logo.png')}  />
                     </div>
                 </Box>
-                <Content className="content-container" pose={contentIsVisible ? 'visible' : 'hidden'}>
-                    <p>Welcome to our Trivia Activity</p>
+                <Content className="content-container container" pose={contentIsVisible ? 'visible' : 'hidden'}>
+                    <div className="row align-items-center">
+                    <div className="col-12 align-self-center"><p>Welcome to our Trivia Activity</p></div>
+                    <div className="col-12 align-self-center">
+                        <Link className="start-button" to="/settings">
+                        
+                            PRESS TO START
+                        
+                        </Link>
+                    </div>
+                    </div>
                     
-                    <Link className="start-button" to="/settings">
                     
-                        PRESS TO START
-                    
-                    </Link>
                 </Content>
              </div>
            /* <div className="Welcome app-slide">

@@ -18,6 +18,117 @@
   color: white;
 }
 
+.page-container{
+  max-width: 600px;
+  position: relative;
+}
+
+.image-container{
+  width: 100%;
+  height: 175px;
+}
+
+.welcome-logo{
+  width: 50%;
+  height: auto;
+}
+
+.content-container{
+  position: absolute;
+  border-radius: 55px;
+  background-color: #BF1E2D;
+  color:#FCF6F5FF;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+}
+
+
+
+.start-button{
+  color: white;
+}
+
+.start-button:hover{
+  color: white;
+}
+
+.padded-row{
+  margin-bottom: 20px;
+}
+
+.settings-container{
+  background-color: #BF1E2D;
+  border-radius: 15px;
+  text-align: left;
+  padding: 80px;
+  overflow: scroll; 
+}
+
+.template-logo{
+  width: 85%;
+  height: auto;
+  float: left;
+}
+
+.question-container{
+  /* width: 70%;
+  height: 100%;
+  min-height:70vh;
+  max-width:70hw; */
+  text-align: left;
+  padding: 80px;
+  overflow: scroll;
+  background-color: #BF1E2D;
+  border-radius: 15px;
+}
+
+.team-name{
+  max-width: 40%;
+  float: left;
+}
+
+.team-score{
+  max-width: 40%;
+}
+
+.team-score label{
+  float: right;
+}
+
+.question{
+  color: black;
+  text-align: center;
+  height: 50px;
+  margin-top: 20px;
+  background: white;
+  padding: 5px;
+  border-radius: 35px;
+}
+
+.choices{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.choice {
+  color: black;
+  background-color: #bf1e2d;
+  height: 50px;
+  color: white;
+  font-size: 16pt;
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+  border-radius: 35px;
+}
+
+.choice:hover{
+  background-color: #bf656e;
+}
+
 .app-slide{
   max-height: 70vh;
   max-width: 70%;
@@ -76,36 +187,6 @@
   right: 0;
 }
 
-.image-container{
-  width: 100%;
-  height: 175px;
-}
-
-.welcome-logo{
-  width: 50%;
-  height: auto;
-}
-
-.content-container{
-  position: absolute;
-  border-radius: 55px;
-  background-color: #BF1E2D;
-  color:#FCF6F5FF;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.page-container{
-  max-width: 600px;
-  position: relative;
-}
-
-.start-button{
-  color: white;
-}
-
 .Welcome p{
   /* font-family: 'Arial Black'; */
   font-style: bold;
@@ -123,17 +204,9 @@
   padding: 30px;
   float: left;
 }
-.App button{
-  /* font-family: 'Trebuchet MS'; */
-  margin-bottom: -50px;
-  vertical-align: bottom;
-  background-color: #bf1e2d;
-  min-width: 20%;
-  height: 50px;
-  color: white;
-}
+
 .App button:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
-  background-color: #bf656e;
+  
 }
 
 .Settings{
@@ -146,6 +219,8 @@
   overflow: scroll;
   /* display: flex; */
 }
+
+
 .Settings label{
   display: inline-block;
   font-size: 24px;
@@ -177,32 +252,3 @@
   font-size: 20px;
 }
 
- .team-name{
-  max-width: 40%;
-  float: left;
-}
-
- .team-score{
-  max-width: 40%;
-  float: right;
-}
-
-.question{
-  color: black;
-  width: 70%;
-  text-align: center;
-  margin: auto auto;
-  background: white;
-  padding: 5px;
-  border-radius: 35px;
-}
-.choice {
-  color: black;
-  width: 50%;
-  font-size: 16pt;
-  text-align: center;
-  margin: 30px auto;
-  background: white;
-  padding: 5px;
-  border-radius: 35px;
-}

@@ -40,48 +40,58 @@ class GameSettings extends React.Component {
 
     render() {
         return(
-            <Fade left>
-            <div className="Settings app-slide page-container">
-                <div>
-                    <label htmlFor="">Number of teams</label>
-                    <div className="input">
-                        <input type="number" onChange={(e)=>this.onTeamCountChange(e)} value={this.state.teams_num} min={1}/>
-                        {/* <Button key="+" onClick={this.addFields}>+</Button> */}
+            <div className="container">
+                <div className="row padded-row">
+                    <div className="col-4">
+                        <img className="template-logo" alt="" src={require('../../img/logo.png')}  />
                     </div>
                 </div>
-                <br/>
-                <div>
-                    <label htmlFor="">Number of rounds</label>
-                    <div className="input">
-                        <input type="number" name="" id="" onChange={(e)=>this.onRoundCountChange(e)} value={this.state.rounds_num} min={1}/>
-                    </div>
-                </div>
-                <br/>   
-                <hr/>
-                {this.state.teams.map((team, index)=>
-                    <div>
-                        <label htmlFor="">Team ({index+1}) name *</label>
-                        <br/>
-                        <div className="input">
-                            <input type="text" name="" id="" value={team.name} onChange={(e)=>this.onTeamNameChange(e, index)} defaultValue="TeamName" required/>
-                        </div>
-                    </div>
-                )}
-                <h6>(*) required fields</h6>
-               
-                <Link to={{
-                    pathname: '/round',
-                    state: this.state
-                }}>
-                    <div className="submitbutton">
-                        <Button variant="primary">
-                            START GAME
-                        </Button>
-                    </div>
-                </Link>
+                <div className="row">
+                    <Fade left>
+                        <div className="col-2"></div>
+                        <div className="col-8 settings-container">
+                            <div>
+                                <label htmlFor="">Number of teams</label>
+                                <div className="input">
+                                    <input type="number" onChange={(e)=>this.onTeamCountChange(e)} value={this.state.teams_num} min={1}/>
+                                    {/* <Button key="+" onClick={this.addFields}>+</Button> */}
+                                </div>
+                            </div>
+                            <br/>
+                            <div>
+                                <label htmlFor="">Number of rounds</label>
+                                <div className="input">
+                                    <input type="number" name="" id="" onChange={(e)=>this.onRoundCountChange(e)} value={this.state.rounds_num} min={1}/>
+                                </div>
+                            </div>
+                            <br/>   
+                            <hr/>
+                            {this.state.teams.map((team, index)=>
+                                <div>
+                                    <label htmlFor="">Team ({index+1}) name *</label>
+                                    <br/>
+                                    <div className="input">
+                                        <input type="text" name="" id="" value={team.name} onChange={(e)=>this.onTeamNameChange(e, index)} defaultValue="TeamName" required/>
+                                    </div>
+                                </div>
+                            )}
+                            <h6>(*) required fields</h6>
+                        
+                            <Link to={{
+                                pathname: '/round',
+                                state: this.state
+                            }}>
+                                <div className="submitbutton">
+                                    <Button variant="primary">
+                                        START GAME
+                                    </Button>
+                                </div>
+                            </Link>
 
-        </div>
-            </Fade>
+                        </div>
+                    </Fade>
+                </div>
+            </div>
         )
     }
     
