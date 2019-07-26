@@ -66,3 +66,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Import error
+- Change esm->es6 in the first 2 imports in node_modules/react-transition-group/esm/Transition.js
+- Change owner.getName()->owner.type.name in node_modules/react-radio-buttons/node_modules/react/lib/ReactComponentTreeHook.js (line 262)
+- Change padding: 3 -> padding: 0 (line 449) and comment borderStyle: 'solid' (line 453) in node_modules/react-radio-buttons/lib/index.js
