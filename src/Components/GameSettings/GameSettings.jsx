@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Fade from 'react-reveal/Fade';
+import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
 class GameSettings extends React.Component {
 
@@ -29,13 +30,13 @@ class GameSettings extends React.Component {
         this.setState({rounds_num: event.target.value})
     }
 
-    onTeamCountChange(event){
+    onTeamCountChange(value){
         let teams = this.state.teams;
-        let teams_num = event.target.value;
+        let teams_num = value;
         let old_num = teams.length;
         teams.length = teams_num;
         teams.fill({name:'', score:0}, old_num);
-        this.setState({teams_num: event.target.value, teams: teams})
+        this.setState({teams_num: value, teams: teams})
     }
 
     render() {
@@ -50,12 +51,15 @@ class GameSettings extends React.Component {
                     <Fade left>
                         <div className="col-2"></div>
                         <div className="col-8 settings-container">
-                            <div>
-                                <label htmlFor="">Number of teams</label>
-                                <div className="input">
-                                    <input type="number" onChange={(e)=>this.onTeamCountChange(e)} value={this.state.teams_num} min={1}/>
-                                    {/* <Button key="+" onClick={this.addFields}>+</Button> */}
-                                </div>
+                            <div className="row radio">
+                                <label htmlFor="">Number of teams</label> <br/>
+                                <RadioGroup style={{display: "contents"}} onChange={ this.onTeamCountChange } horizontal>
+                                {Array.from(Array(8).keys()).map((value, index) => {
+                                    return  <RadioButton value={value+1} iconSize="0" iconInnerSize="0">
+                                        {value+1}
+                                    </RadioButton>
+                                })}
+                                </RadioGroup>
                             </div>
                             <br/>
                             <div>

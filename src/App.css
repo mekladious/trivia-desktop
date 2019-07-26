@@ -66,6 +66,13 @@
   padding: 80px;
   overflow: scroll; 
 }
+.settings-container label{
+  width: 100%
+}
+
+.settings-container .radio {
+  text-align: center;
+}
 
 .template-logo{
   width: 85%;
@@ -234,21 +241,28 @@
 
 .Settings .submitbutton{
   bottom: 18%;
-  right: 15%;
-  width: 150px;
-  float: right;
+  left: 15%;
+  /* width: 150px; */
 }
-.Settings .submitbutton button{
+.start-button{
   font-size: 16px;
   font-style: bold;
-  width: 100%;
+  float: right;
 }
 
-.Settings .input{
-  margin-left: 50px;
+.number-input{
+  margin-left: 10px;
+  /* min-width: 100px; */
+  min-height: 100px;
 }
 
 .Settings .input input{
   font-size: 20px;
+}
+
+.back-button{
+  font-size: 16px;
+  font-style: bold;
+  float: left;
 }
 
