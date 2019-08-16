@@ -13,6 +13,7 @@
     "electron-is-dev": "^1.1.0",
     "fsevents": "^2.0.7",
     "jquery": "^3.4.1",
+    "lucky-wheel": "^1.1.5",
     "popmotion": "^8.7.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
