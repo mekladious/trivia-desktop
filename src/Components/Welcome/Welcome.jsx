@@ -82,8 +82,8 @@ class Welcome extends React.Component {
               <p>Welcome to our Trivia Activity</p>
             </div>
             <div className="col-12 align-self-center">
-              <Link className="start-button" to="/settings">
-                <p>PRESS TO START</p>
+              <Link className="welcome-start-button" to="/settings">
+                PRESS TO START
               </Link>
             </div>
           </div>
