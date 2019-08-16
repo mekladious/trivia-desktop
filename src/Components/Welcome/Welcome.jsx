@@ -1,77 +1,95 @@
 import React from "react";
-import { withRouter,Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
-import posed from 'react-pose';
-import { tween, styler, easing } from 'popmotion';
-import ReactPlayer from 'react-player';
+import { withRouter, Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import posed from "react-pose";
+import { tween, styler, easing } from "popmotion";
+import ReactPlayer from "react-player";
 
 const Box = posed.div({
-    hidden: {opacity: 0 },
-    visible: {opacity: 1, transition: {duration: 5000 } }
-  });
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 5000 } }
+});
 
 const Content = posed.div({
-    hidden: {opacity: 0 },
-    visible: {opacity: 1, transition: {duration: 1000 } }
-  });
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 1000 } }
+});
 
 const Videodiv = posed.div({
-    hidden: {opacity: 0 },
-    visible: {opacity: 1, transition: {duration: 0 } }
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0 } }
 });
 
 class Welcome extends React.Component {
+  state = {
+    boxIsVisible: false,
+    contentIsVisible: false,
+    videoIsVisible: true
+  };
 
-    state = { boxIsVisible: false, contentIsVisible: false, videoIsVisible: true };
-
-    onEnded = () => {
-        this.setState({ videoIsVisible: !this.state.videoIsVisible });
+  onEnded = () => {
+    this.setState({ videoIsVisible: !this.state.videoIsVisible });
+    setTimeout(() => {
+      this.setState({ boxIsVisible: !this.state.boxIsVisible });
+      setTimeout(() => {
+        const divStyler = styler(document.querySelector("#box"));
+        tween({
+          from: 0,
+          to: { x: -450, y: -260 },
+          duration: 1000,
+          ease: easing.backOut
+        }).start(divStyler.set);
         setTimeout(() => {
-            this.setState({ boxIsVisible: !this.state.boxIsVisible });
-                setTimeout(() => {
-                    const divStyler = styler(document.querySelector('#box'));
-                    tween({from: 0,
-                        to: { x: -450, y:-260},
-                        duration: 1000,
-                        ease: easing.backOut,
-                    }).start(divStyler.set);
-                    setTimeout(() => {
-                        this.setState({ contentIsVisible: !this.state.contentIsVisible });
-                    }, 500);
-                }, 3000);
-        }, 2000);
-    }
-    render() {
-        const { boxIsVisible } = this.state;
-        const { contentIsVisible } = this.state;
-        const { videoIsVisible } = this.state;
-        return(
-            <div className="page-container">
-            <Videodiv className="video-div" pose={videoIsVisible ? 'visible' : 'hidden'}>
-                <ReactPlayer id="video" height={"auto"} width={"100%"}
-                 url={require('../../vid/notion_intro.mp4')} onEnded={this.onEnded} playing />
-            </Videodiv>
-                <Box id="box" pose={boxIsVisible ? 'visible' : 'hidden'}>
-                    <div className="image-container">
-                        <img className="welcome-logo" alt="" src={require('../../img/logo.png')}  />
-                    </div>
-                </Box>
-                <Content className="content-container container" pose={contentIsVisible ? 'visible' : 'hidden'}>
-                    <div className="row align-items-center">
-                    <div className="col-12 align-self-center"><p>Welcome to our Trivia Activity</p></div>
-                    <div className="col-12 align-self-center">
-                        <Link className="start-button" to="/settings">
-                        
-                            PRESS TO START
-                        
-                        </Link>
-                    </div>
-                    </div>
-                    
-                    
-                </Content>
-             </div>
-           /* <div className="Welcome app-slide">
+          this.setState({ contentIsVisible: !this.state.contentIsVisible });
+        }, 500);
+      }, 3000);
+    }, 2000);
+  };
+  render() {
+    const { boxIsVisible } = this.state;
+    const { contentIsVisible } = this.state;
+    const { videoIsVisible } = this.state;
+    return (
+      <div className="page-container">
+        <Videodiv
+          className="video-div"
+          pose={videoIsVisible ? "visible" : "hidden"}
+        >
+          <ReactPlayer
+            id="video"
+            height={"auto"}
+            width={"100%"}
+            url={require("../../vid/notion_intro.mp4")}
+            onEnded={this.onEnded}
+            playing
+          />
+        </Videodiv>
+        <Box id="box" pose={boxIsVisible ? "visible" : "hidden"}>
+          <div className="image-container">
+            <img
+              className="welcome-logo"
+              alt=""
+              src={require("../../img/logo.png")}
+            />
+          </div>
+        </Box>
+        <Content
+          className="content-container container"
+          pose={contentIsVisible ? "visible" : "hidden"}
+        >
+          <div className="row align-items-center">
+            <div className="col-12 align-self-center">
+              <p>Welcome to our Trivia Activity</p>
+            </div>
+            <div className="col-12 align-self-center">
+              <Link className="start-button" to="/settings">
+                <p>PRESS TO START</p>
+              </Link>
+            </div>
+          </div>
+        </Content>
+      </div>
+      /* <div className="Welcome app-slide">
                 <div className="image-container">
                     <img alt="" src={require('../../img/logo.png')}  />
                 </div>
@@ -83,9 +101,8 @@ class Welcome extends React.Component {
                     </Button>
                     </Link>
             </div>*/
-        )
-    }
-    
+    );
+  }
 }
 
 export default withRouter(Welcome);
