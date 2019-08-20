@@ -8,7 +8,10 @@ import GameSettings from "./Components/GameSettings/GameSettings";
 import RoundResults from "./Components/RoundResults/RoundResults";
 import FinalResults from "./Components/FinalResults/FinalResults";
 import Question from "./Components/Question/Question";
-import Randomizer from "./Components/Randomizer/Randomizer";
+import Randomizer1 from "./Components/Randomizer1/Randomizer1";
+import Randomizer2 from "./Components/Randomizer2/Randomizer2";
+import Randomizer3 from "./Components/Randomizer3/Randomizer3";
+import Randomizer4 from "./Components/Randomizer4/Randomizer4";
 import Welcome from "./Components/Welcome/Welcome";
 import './App.css';
 import { createBrowserHistory } from 'history'; // you need to install this package
@@ -29,9 +32,9 @@ class App extends Component {
                 <Route path='/round' render={(props) => <RoundResults {...this.props} />} />
                 <Route path='/final' render={(props) => <FinalResults {...this.props} />} />
                 <Route path='/question' render={(props) => <Question {...this.props} />} />
-                <Route path='/rand' render={(props) => <Randomizer {...this.props} />} />
+                <Route path='/rand' render={(props) => <Randomizer1 {...this.props} />} />
 
-                <Route path='/' render={(props) => <Welcome {...this.props} />} />
+                <Route path='/' render={(props) => <Randomizer4 {...this.props} />} />
             </Switch>
           </BrowserRouter>
       </div>
