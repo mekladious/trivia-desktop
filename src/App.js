@@ -14,13 +14,18 @@ import Randomizer3 from "./Components/Randomizer3/Randomizer3";
 import Randomizer4 from "./Components/Randomizer4/Randomizer4";
 import Welcome from "./Components/Welcome/Welcome";
 import './App.css';
+import { createBrowserHistory } from 'history'; // you need to install this package
+let history = createBrowserHistory();
 
 class App extends Component {
-
+  constructor(){
+    super();
+    this.state = {history: history}
+  }
   render() {
     return (
       <div className="App">
-          <BrowserRouter>
+          <BrowserRouter history={history}>
             <Switch>
               
                 <Route path='/settings' render={(props) => <GameSettings {...this.props} />} />

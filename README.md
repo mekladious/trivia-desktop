@@ -75,3 +75,14 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 5- Medicine
 6- Music 
 7- Intelligence
+
+### Import changes
+- Change esm->es6 in the first 2 imports in node_modules/react-transition-group/esm/Transition.js
+- Change owner.getName()->owner.type.name in node_modules/react-radio-buttons/node_modules/react/lib/ReactComponentTreeHook.js (line 262)
+- Change padding: 3 -> padding: 0 (line 449) and comment borderStyle: 'solid' (line 453) in node_modules/react-radio-buttons/lib/index.js
+- Changes in "node_modules/lucky-wheel/lib/LuckyWheel.js":
+```
+285     src: require("../../../src/img/turntable-bg2.png")
+291     src: require("../../../src/img/turntable2.png")
+295     src: require("../../../src/img/pointer.png")
+```

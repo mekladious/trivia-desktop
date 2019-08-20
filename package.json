@@ -9,7 +9,7 @@
   "dependencies": {
     "@babel/runtime": "^7.5.5",
     "axios": "^0.18.0",
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.1.1",
     "electron-is-dev": "^1.1.0",
     "fsevents": "^2.0.7",
     "jquery": "^3.4.1",
@@ -24,6 +24,7 @@
     "react-pose": "^4.0.8",
     "react-random-roller": "^0.1.1",
     "react-random-selection-wheel": "^0.1.0",
+    "react-radio-buttons": "^1.2.2",
     "react-reveal": "^1.2.2",
     "react-roulette-slot": "^0.3.4",
     "react-router": "^5.0.0",
