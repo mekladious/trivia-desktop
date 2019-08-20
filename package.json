@@ -30,6 +30,7 @@
     "react-router-dom": "^5.0.0",
     "react-router-page-transition": "^3.1.0",
     "react-scripts": "3.0.1",
+    "react-slot-machine": "^1.0.0",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
