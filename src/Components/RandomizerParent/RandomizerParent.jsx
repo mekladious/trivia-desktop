@@ -6,6 +6,7 @@ import Randomizer2 from "../Randomizer2/Randomizer2";
 import Randomizer3 from "../Randomizer3/Randomizer3";
 import Randomizer4 from "../Randomizer4/Randomizer4";
 import Randomizer5 from "../Randomizer5/Randomizer5";
+import Randomizer6 from "../Randomizer6/Randomizer6";
 
 class RandomizerParent extends React.Component {
     constructor(props) {
@@ -17,7 +18,8 @@ class RandomizerParent extends React.Component {
                 <Randomizer2 {...this.props}/>,
                 <Randomizer3 {...this.props}/>,
                 <Randomizer4 {...this.props}/>,
-                <Randomizer5 {...this.props}/>
+                <Randomizer5 {...this.props}/>,
+                <Randomizer6 {...this.props}/>
             ]
         }
     }
@@ -37,7 +39,7 @@ class RandomizerParent extends React.Component {
                 <div className="row">
                     <Fade left>
                         <div className="col-2" />
-                            <div className="col-8 settings-container">
+                            <div className="col-8 rand-container">
                                 {this.state.randomizer_list[Math.floor(Math.random() * this.state.randomizer_list.length)]}
                             </div>
                         <div className="col-2" />
