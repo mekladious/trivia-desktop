@@ -31,6 +31,15 @@ class App extends Component {
         "Medicine",
         "Music",
         "Intelligence"
+      ],
+      categoriesObj:[
+        { id: 1, img: require("./img/science.png"), label: 'Science' },
+        { id: 2, img: require("./img/sport.png"), label: 'Sports' },
+        { id: 3, img: require("./img/world.png"), label: 'World' },
+        { id: 4, img: require("./img/history.png"), label: 'History' },
+        { id: 5, img: require("./img/medicine.png"), label: 'Medicine' },
+        { id: 6, img: require("./img/music.png"), label: 'Music' },
+        { id: 7, img: require("./img/intel.png"), label: 'Intelligence' }
       ]
     }
   }
@@ -46,7 +55,7 @@ class App extends Component {
                 <Route path='/question' render={(props) => <Question {...this.props} />} />
                 <Route path='/rand' render={(props) => <Randomizer1 {...this.props} />} />
 
-                <Route path='/' render={(props) => <RandomizerParent {...this.props} categories={this.state.categories}/>} />
+                <Route path='/' render={(props) => <RandomizerParent {...this.props} categories={this.state.categories} categoriesObj={this.state.categoriesObj}/>} />
             </Switch>
           </BrowserRouter>
       </div>

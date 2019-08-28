@@ -8,20 +8,6 @@ class Randomizer3 extends React.Component {
     constructor(props) {
         super();
         this.state = { 
-            data: [
-                { id: 1, img: 'http://dummyimage.com/30x30', label: 'Larry' },
-                { id: 2, img: 'http://dummyimage.com/30x30', label: 'Joseph' },
-                { id: 3, img: 'http://dummyimage.com/30x30', label: 'Paul' },
-                { id: 4, img: 'http://dummyimage.com/30x30', label: 'Ronald' },
-                { id: 5, img: 'http://dummyimage.com/30x30', label: 'Helen' },
-                { id: 6, img: 'http://dummyimage.com/30x30', label: 'Maria' },
-                { id: 7, img: 'http://dummyimage.com/30x30', label: 'Mark' },
-                { id: 8, img: 'http://dummyimage.com/30x30', label: 'Mark' },
-                { id: 9, img: 'http://dummyimage.com/30x30', label: 'Carol' },
-                { id: 10, img: 'http://dummyimage.com/30x30', label: 'Ronald' },
-                { id: 11, img: 'http://dummyimage.com/30x30', label: 'Nancy' },
-                { id: 12, img: 'http://dummyimage.com/30x30', label: 'Michelle' },
-            ],
             max: 12,
             min: 1
         }
@@ -37,9 +23,12 @@ class Randomizer3 extends React.Component {
     render(){
         return(
             <ReactRouletteSlot
-                data={this.state.data}
+                className="ch"
+                data={this.props.categoriesObj}
                 action={this.displayResult}
-                size={1}
+                size={300}
+                height={350}
+                width={550}
             />
         );
     }

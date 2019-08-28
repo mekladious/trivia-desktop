@@ -74,6 +74,25 @@
   padding-right: 80px;
   overflow: scroll;
 }
+.rand-container {
+  background-color: #bf1e2d;
+  border-radius: 15px;
+  text-align: center;
+  padding: 80px;
+  padding-left: 80px;
+  padding-right: 80px;
+  /* overflow: scroll; */
+  /* font-size: 50pt; */
+}
+.rand-container span {
+  font-size: 70pt;
+}
+.RandomItem__img {
+  max-width: 60%;
+}
+.rand-word {
+  font-size: 100pt;
+}
 .settings-container label {
   width: 100%;
 }
