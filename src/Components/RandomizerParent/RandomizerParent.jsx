@@ -9,45 +9,39 @@ import Randomizer5 from "../Randomizer5/Randomizer5";
 import Randomizer6 from "../Randomizer6/Randomizer6";
 
 class RandomizerParent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            randomizer: Math.floor(Math.random()*5) + 1 ,
-            randomizer_list: [
-                <Randomizer1 {...this.props}/>,
-                <Randomizer2 {...this.props}/>,
-                <Randomizer3 {...this.props}/>,
-                <Randomizer4 {...this.props}/>,
-                <Randomizer5 {...this.props}/>,
-                <Randomizer6 {...this.props}/>
-            ]
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      randomizer: Math.floor(Math.random() * 5) + 1,
+      randomizer_list: [
+        // <Randomizer1 {...this.props} />,
+        <Randomizer2 {...this.props} />,
+        <Randomizer3 {...this.props} />,
+        // <Randomizer4 {...this.props} />,
+        <Randomizer5 {...this.props} />,
+        <Randomizer6 {...this.props} />
+      ]
+    };
+  }
 
-    render() {
-        return (
-            <div className="container">
-                <div className="row padded-row">
-                    <div className="col-4">
-                        <img
-                        className="template-logo"
-                        alt=""
-                        src={require("../../img/logo.png")}
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <Fade left>
-                        <div className="col-2" />
-                            <div className="col-8 rand-container">
-                                {this.state.randomizer_list[Math.floor(Math.random() * this.state.randomizer_list.length)]}
-                            </div>
-                        <div className="col-2" />
-                    </Fade>
-                </div>
+  render() {
+    return (
+      <div className="container">
+        <div className="row">
+          <Fade left>
+            <div className="col-2" />
+            <div className="col-8 rand-container">
+              {
+                this.state.randomizer_list[
+                  Math.floor(Math.random() * this.state.randomizer_list.length)
+                ]
+              }
             </div>
-            
-        );
-    }
+            <div className="col-2" />
+          </Fade>
+        </div>
+      </div>
+    );
+  }
 }
 export default withRouter(RandomizerParent);

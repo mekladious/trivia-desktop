@@ -119,21 +119,22 @@ class GameSettings extends React.Component {
                   <h6>(*) required fields</h6>
                 </div>
               </div>
+              <br />
               <div className="row">
-                <div className="col-2" />
-                <div className="col-8">
-                  <Link
-                    to={{
-                      pathname: "/round",
-                      state: this.state
-                    }}
-                  >
-                    <div className="submitbutton">
-                      <Link variant="primary" to="/rand">
+                <div className="col-4">
+                  <div className="demo-button white-button">
+                    <Link className="white-button" variant="primary" to="/rand">
+                      DEMO
+                    </Link>
+                  </div>
+                </div>
+                <div className="col-4" />
+                <div className="col-4">
+                  <div className="start-game-button">
+                    <Link className="white-button" variant="primary" to="/rand">
                       START GAME
-                      </Link>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

@@ -18,6 +18,9 @@
   color: white;
 }
 
+button {
+  outline: none;
+}
 .page-container {
   max-width: 600px;
   position: relative;
@@ -113,7 +116,7 @@
   min-height:70vh;
   max-width:70hw; */
   text-align: left;
-  padding: 80px;
+  padding: 50px;
   overflow: scroll;
   background-color: #bf1e2d;
   border-radius: 15px;
@@ -121,7 +124,11 @@
 
 .team-name {
   max-width: 40%;
-  float: left;
+  float: right;
+}
+
+.team-name label {
+  float: right;
 }
 
 .team-score {
@@ -129,7 +136,7 @@
 }
 
 .team-score label {
-  float: right;
+  float: left;
 }
 
 .question {
@@ -161,6 +168,22 @@
 
 .choice:hover {
   background-color: #bf656e;
+}
+
+.choice:focus {
+  outline: none;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.correct-choice:focus {
+  background-color: #32cd32;
+}
+
+.wrong-choice:focus {
+  background-color: #ffcc00;
 }
 
 .app-slide {
@@ -293,4 +316,56 @@
   font-size: 16px;
   font-style: bold;
   float: left;
+}
+
+.demo-button {
+  text-align: right;
+}
+
+.start-game-button {
+  text-align: left;
+}
+
+.white-button {
+  color: white;
+}
+
+.white-button:hover {
+  color: white;
+}
+
+.winner-container {
+  text-align: center;
+  padding: 80px;
+  overflow: scroll;
+  background-color: #bf1e2d;
+  border-radius: 15px;
+}
+
+.winner-circle {
+  width: 170px;
+  height: 170px;
+  line-height: 170px;
+  background: #14d790;
+  border-radius: 50%;
+  transform-origin: 50% 50%;
+  display: inline-block;
+}
+
+.winner-name {
+  vertical-align: middle;
+  font-size: 30px;
+}
+
+.final-container {
+  margin-bottom: 200px;
+}
+
+.category-div {
+  text-align: center;
+}
+
+.category-icon {
+  width: 25%;
+  height: auto;
 }
