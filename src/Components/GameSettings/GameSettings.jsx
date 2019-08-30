@@ -129,7 +129,9 @@ class GameSettings extends React.Component {
                     }}
                   >
                     <div className="submitbutton">
-                      <Button variant="primary">START GAME</Button>
+                      <Link variant="primary" to="/rand">
+                      START GAME
+                      </Link>
                     </div>
                   </Link>
                 </div>

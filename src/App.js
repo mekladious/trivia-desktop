@@ -53,9 +53,9 @@ class App extends Component {
                 <Route path='/round' render={(props) => <RoundResults {...this.props} />} />
                 <Route path='/final' render={(props) => <FinalResults {...this.props} />} />
                 <Route path='/question' render={(props) => <Question {...this.props} />} />
-                <Route path='/rand' render={(props) => <Randomizer1 {...this.props} />} />
+                <Route path='/rand' render={(props) => <RandomizerParent {...this.props} categories={this.state.categories} categoriesObj={this.state.categoriesObj}/>} />
 
-                <Route path='/' render={(props) => <RandomizerParent {...this.props} categories={this.state.categories} categoriesObj={this.state.categoriesObj}/>} />
+                <Route path='/' render={(props) => <Welcome {...this.props} />} />
             </Switch>
           </BrowserRouter>
       </div>
