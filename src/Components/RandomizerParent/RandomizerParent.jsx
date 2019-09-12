@@ -39,7 +39,7 @@ class RandomizerParent extends React.Component {
                 <div className="row">
                     <Fade left>
                         <div className="col-2" />
-                            <div className="col-8 rand-container">
+                            <div className="col-8 rand-container roulette">
                                 {this.state.randomizer_list[Math.floor(Math.random() * this.state.randomizer_list.length)]}
                             </div>
                         <div className="col-2" />
