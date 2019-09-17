@@ -12,7 +12,7 @@ class RandomizerParent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      randomizer: Math.floor(Math.random() * 5) + 1,
+      randomizer: Math.floor(Math.random() * 4),
       randomizer_list: [
         // <Randomizer1 {...this.props} />,
         <Randomizer2 {...this.props} />,
@@ -23,6 +23,19 @@ class RandomizerParent extends React.Component {
       ]
     };
   }
+  get_randomizer_number = () => {
+    let randomizer = this.state.randomizer;
+    let previously_used_randomizer = localStorage.getItem(
+      "previously_used_randomizer"
+    );
+    console.log(randomizer, previously_used_randomizer);
+    localStorage.setItem("previously_used_randomizer", randomizer);
+    return randomizer == previously_used_randomizer
+      ? randomizer === 3
+        ? 0
+        : randomizer + 1
+      : randomizer;
+  };
 
   render() {
     return (
@@ -31,11 +44,7 @@ class RandomizerParent extends React.Component {
           <Fade left>
             <div className="col-2" />
             <div className="col-8 rand-container">
-              {
-                this.state.randomizer_list[
-                  Math.floor(Math.random() * this.state.randomizer_list.length)
-                ]
-              }
+              {this.state.randomizer_list[this.get_randomizer_number()]}
             </div>
             <div className="col-2" />
           </Fade>

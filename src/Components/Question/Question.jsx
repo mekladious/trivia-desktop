@@ -15,7 +15,7 @@ class Question extends React.Component {
         name: "Warriors",
         score: 90
       },
-      countdown_seconds: 40,
+      countdown_seconds: 10,
       disable_answers: "",
       correct_answer_sound_url: [
         require("../../aud/correct1.mp3"),

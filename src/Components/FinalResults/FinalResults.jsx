@@ -28,6 +28,7 @@ class FinalResults extends React.Component {
       this.setState({ circleIsSmall: !this.state.circleIsSmall });
     }, 200);
     let audio = new Audio(require("../../aud/winner.mp3"));
+    console.log(audio);
     audio.play();
     audio.onended = () => {
       this.props.history.push("goodbye");

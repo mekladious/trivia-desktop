@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, Redirect } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
@@ -13,7 +13,7 @@ class GameSettings extends React.Component {
     this.state = {
       teams_num: 1,
       rounds_num: 1,
-      teams: [{ name: "", score: 0 }],
+      teams: [{ name: "" }],
       allFieldsValid: false
     };
   }
@@ -32,8 +32,21 @@ class GameSettings extends React.Component {
     let teams_num = value;
     let old_num = teams.length;
     teams.length = teams_num;
-    teams.fill({ name: "", score: 0 }, old_num);
+    teams.fill({ name: "" }, old_num);
     this.setState({ teams_num: value, teams: teams });
+  }
+
+  start_game() {
+    localStorage.setItem("teams_count", this.state.teams_num);
+    localStorage.setItem("current_team", 1);
+    localStorage.setItem("rounds_count", this.state.rounds_num);
+    localStorage.setItem("current_round", 1);
+    localStorage.setItem("teams", this.state.teams);
+    this.state.teams.forEach(team => {
+      localStorage.setItem(team.name + "_score", 0);
+      localStorage.setItem(team.name + "_streak", 0);
+    });
+    return <Redirect to="/rand" />;
   }
 
   render() {
@@ -131,7 +144,11 @@ class GameSettings extends React.Component {
                 <div className="col-4" />
                 <div className="col-4">
                   <div className="start-game-button">
-                    <Link className="white-button" variant="primary" to="/rand">
+                    <Link
+                      className="white-button"
+                      variant="primary"
+                      onClick={() => this.start_game}
+                    >
                       START GAME
                     </Link>
                   </div>
