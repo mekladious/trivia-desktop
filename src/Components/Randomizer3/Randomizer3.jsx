@@ -23,7 +23,6 @@ class Randomizer3 extends React.Component {
     render(){
         return(
             <ReactRouletteSlot
-                className="ch"
                 data={this.props.categoriesObj}
                 action={this.displayResult}
                 size={300}

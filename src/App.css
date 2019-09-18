@@ -87,6 +87,10 @@ button {
   /* overflow: scroll; */
   /* font-size: 50pt; */
 }
+.roulette{
+  color:black;
+}
+
 .rand-container span {
   font-size: 70pt;
 }
