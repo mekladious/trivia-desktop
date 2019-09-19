@@ -18,12 +18,12 @@ class Question extends React.Component {
       },
       countdown_seconds: 10,
       next_question_available: false,
+      no_answer_music_plays: 0,
       disable_answers: "",
       correct_answer_sound_url: [
         require("../../aud/correct1.mp3"),
         require("../../aud/correct2.mp3"),
-        require("../../aud/correct3.wav"),
-        require("../../aud/correct4.wav")
+        require("../../aud/correct3.wav")
       ],
       wrong_answer_sound_url: [
         require("../../aud/wrong1.mp3"),
@@ -33,20 +33,33 @@ class Question extends React.Component {
     };
   }
 
+  countdown_audio;
+
   componentDidMount() {
-    this.timer = setInterval(this.tick, 1000);
     let round_number = this.props.get_current_round();
     let name = this.props.get_current_team().name;
     let score = this.props.get_team_score(name);
     let current_team = { name: name, score: score };
     this.setState({ round_number, current_team });
+    this.timer = setInterval(this.tick, 1000);
+    this.play_countdown_music();
+  }
+
+  play_countdown_music() {
+    this.countdown_audio = new Audio(require("../../aud/countdown.mp3"));
+    this.countdown_audio.preload = "none";
+    console.log(this.countdown_audio);
+    this.countdown_audio.play();
   }
 
   play_countdown_over_sound() {
     let audio = new Audio(require("../../aud/countdownover.mp3"));
     audio.play();
     audio.onended = () => {
-      console.log("move on to next page");
+      this.setState({
+        no_answer_music_plays: this.state.no_answer_music_plays + 1
+      });
+      if (this.state.no_answer_music_plays < 2) audio.play();
     };
   }
 
@@ -76,9 +89,7 @@ class Question extends React.Component {
     );
     let audio = new Audio(this.state.correct_answer_sound_url[random_number]);
     audio.play();
-    audio.onended = () => {
-      this.stop_counter();
-    };
+    audio.onended = () => {};
   }
 
   play_wrong_sound() {
@@ -88,18 +99,19 @@ class Question extends React.Component {
     );
     let audio = new Audio(this.state.wrong_answer_sound_url[random_number]);
     audio.play();
-    audio.onended = () => {
-      this.stop_counter();
-    };
   }
 
   answer_correctly() {
+    this.stop_counter();
+    this.countdown_audio.pause();
     this.setState({ disable_answers: "disabled" });
     this.state.answer_result = "correct";
     this.play_correct_sound();
   }
 
   answer_incorrectly() {
+    this.stop_counter();
+    this.countdown_audio.pause();
     this.setState({ disable_answers: "disabled" });
     this.state.answer_result = "wrong";
     this.play_wrong_sound();

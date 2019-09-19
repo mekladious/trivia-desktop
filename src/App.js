@@ -3,7 +3,6 @@ import React, { Component } from "react";
 // import PageTransition from 'react-router-page-transition';
 import { Switch, Route, BrowserRouter, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import readXlsxFile from "read-excel-file";
 import { csv } from "d3-request";
 
 import GameSettings from "./Components/GameSettings/GameSettings";
