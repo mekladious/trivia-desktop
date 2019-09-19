@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { thisExpression } from "@babel/types";
 import Countdown from "react-countdown-now";
 import Timer from "../Timer/Timer";
@@ -11,11 +11,13 @@ class Question extends React.Component {
     super(props);
     this.tick = this.tick.bind(this);
     this.state = {
+      round_number: 0,
       current_team: {
-        name: "Warriors",
-        score: 90
+        name: "",
+        score: 0
       },
       countdown_seconds: 10,
+      next_question_available: false,
       disable_answers: "",
       correct_answer_sound_url: [
         require("../../aud/correct1.mp3"),
@@ -33,6 +35,11 @@ class Question extends React.Component {
 
   componentDidMount() {
     this.timer = setInterval(this.tick, 1000);
+    let round_number = this.props.get_current_round();
+    let name = this.props.get_current_team().name;
+    let score = this.props.get_team_score(name);
+    let current_team = { name: name, score: score };
+    this.setState({ round_number, current_team });
   }
 
   play_countdown_over_sound() {
@@ -44,6 +51,7 @@ class Question extends React.Component {
   }
 
   stop_counter() {
+    this.setState({ next_question_available: true });
     clearInterval(this.timer);
     setTimeout(() => {
       //   this.props.history.push("goodbye");
@@ -113,13 +121,23 @@ class Question extends React.Component {
           <div className="col-2" />
           <div className="col-8 question-container">
             <div className="row">
-              <div className="col-4" />
+              <div className="col-1" />
+              <div className="col-3">
+                <p>Round {this.state.round_number}</p>
+              </div>
               <div className="col-4 category-div">
                 <img
                   className="category-icon"
                   alt=""
                   src={require("../../img/worldw.png")}
                 />
+              </div>
+              <div className="col-3 next-button">
+                {this.state.next_question_available && (
+                  <Link className="white-button" variant="primary" to="/result">
+                    next question
+                  </Link>
+                )}
               </div>
             </div>
             <br />
@@ -132,7 +150,7 @@ class Question extends React.Component {
                 <Timer seconds={this.state.countdown_seconds} />
               </div>
               <div className="col-4 team-score">
-                <label htmlFor="">Score:{this.state.current_team.score}</label>
+                <label htmlFor="">Score: {this.state.current_team.score}</label>
               </div>
             </div>
             {/* <br/> */}

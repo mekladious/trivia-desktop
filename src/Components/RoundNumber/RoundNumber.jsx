@@ -12,12 +12,14 @@ class RandomizerParent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      round_number: 0
+      round_number: 0,
+      team_name: ""
     };
   }
   componentDidMount() {
-    let round_number = localStorage.getItem("current_round");
-    this.setState({ round_number });
+    let round_number = this.props.get_current_round();
+    let team_name = this.props.get_current_team().name;
+    this.setState({ round_number, team_name });
     setTimeout(() => {
       this.props.history.push(`/rand`);
     }, 5000);
@@ -30,7 +32,8 @@ class RandomizerParent extends React.Component {
           <Fade left>
             <div className="col-2" />
             <div className="col-8 rand-container roulette">
-              <p className="round-number">Round {this.state.round_number}</p>
+              <p className="round-number">Round {this.state.round_number} </p>
+              <p className="round-number"> {this.state.team_name} </p>
             </div>
             <div className="col-2" />
           </Fade>

@@ -378,3 +378,7 @@ button {
   font-size: 100px;
   color: white;
 }
+
+.next-button {
+  text-align: right;
+}

@@ -3,6 +3,8 @@ import React, { Component } from "react";
 // import PageTransition from 'react-router-page-transition';
 import { Switch, Route, BrowserRouter, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import readXlsxFile from "read-excel-file";
+import { csv } from "d3-request";
 
 import GameSettings from "./Components/GameSettings/GameSettings";
 import RoundResults from "./Components/RoundResults/RoundResults";
@@ -46,6 +48,31 @@ class App extends Component {
     };
   }
 
+  get_current_round = () => {
+    return parseInt(localStorage.getItem("current_round"));
+  };
+
+  get_current_team = () => {
+    let team_number = parseInt(localStorage.getItem("current_team"));
+    let team_names = JSON.parse(localStorage.getItem("teams"));
+    return team_names[team_number - 1];
+  };
+
+  get_team_score = name => {
+    return parseInt(localStorage.getItem(name + "_score"));
+  };
+
+  get_team_streak = name => {
+    return parseInt(localStorage.setItem(name + "_streak", 0));
+  };
+
+  load_questions = () => {
+    csv("Questions⁩/Science_questions.csv", function(error, data) {
+      if (error) throw error;
+      console.log(data);
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -53,11 +80,22 @@ class App extends Component {
           <Switch>
             <Route
               path="/settings"
-              render={props => <GameSettings {...this.props} />}
+              render={props => (
+                <GameSettings
+                  {...this.props}
+                  load_questions={this.load_questions}
+                />
+              )}
             />
             <Route
               path="/round"
-              render={props => <RoundNumber {...this.props} />}
+              render={props => (
+                <RoundNumber
+                  {...this.props}
+                  get_current_round={this.get_current_round}
+                  get_current_team={this.get_current_team}
+                />
+              )}
             />
             <Route
               path="/result"
@@ -69,7 +107,15 @@ class App extends Component {
             />
             <Route
               path="/question"
-              render={props => <Question {...this.props} />}
+              render={props => (
+                <Question
+                  {...this.props}
+                  get_current_round={this.get_current_round}
+                  get_current_team={this.get_current_team}
+                  get_team_score={this.get_team_score}
+                  get_team_streak={this.get_team_streak}
+                />
+              )}
             />
             <Route
               path="/rand"

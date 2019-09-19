@@ -42,13 +42,16 @@ class GameSettings extends React.Component {
     localStorage.setItem("current_team", 1);
     localStorage.setItem("rounds_count", this.state.rounds_num);
     localStorage.setItem("current_round", 1);
-    localStorage.setItem("teams", this.state.teams);
+    localStorage.setItem("teams", JSON.stringify(this.state.teams));
     this.state.teams.forEach(team => {
       localStorage.setItem(team.name + "_score", 0);
       localStorage.setItem(team.name + "_streak", 0);
     });
-    this.props.history.push(`/round`);
+    this.props.load_questions();
+    // this.props.history.push(`/round`);
   };
+
+  componentDidMount() {}
 
   render() {
     return (
