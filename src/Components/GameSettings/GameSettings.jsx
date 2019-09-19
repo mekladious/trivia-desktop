@@ -36,7 +36,8 @@ class GameSettings extends React.Component {
     this.setState({ teams_num: value, teams: teams });
   }
 
-  start_game() {
+  start_game = () => {
+    if (this.state.teams.some(item => "" == item.name)) return;
     localStorage.setItem("teams_count", this.state.teams_num);
     localStorage.setItem("current_team", 1);
     localStorage.setItem("rounds_count", this.state.rounds_num);
@@ -46,8 +47,8 @@ class GameSettings extends React.Component {
       localStorage.setItem(team.name + "_score", 0);
       localStorage.setItem(team.name + "_streak", 0);
     });
-    return <Redirect to="/rand" />;
-  }
+    this.props.history.push(`/round`);
+  };
 
   render() {
     return (
@@ -147,7 +148,7 @@ class GameSettings extends React.Component {
                     <Link
                       className="white-button"
                       variant="primary"
-                      onClick={() => this.start_game}
+                      onClick={this.start_game}
                     >
                       START GAME
                     </Link>

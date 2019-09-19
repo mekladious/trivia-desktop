@@ -87,8 +87,8 @@ button {
   /* overflow: scroll; */
   /* font-size: 50pt; */
 }
-.roulette{
-  color:black;
+.roulette {
+  color: black;
 }
 
 .rand-container span {
@@ -372,4 +372,9 @@ button {
 .category-icon {
   width: 25%;
   height: auto;
+}
+
+.round-number {
+  font-size: 100px;
+  color: white;
 }

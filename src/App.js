@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 
 import GameSettings from "./Components/GameSettings/GameSettings";
 import RoundResults from "./Components/RoundResults/RoundResults";
+import RoundNumber from "./Components/RoundNumber/RoundNumber";
 import FinalResults from "./Components/FinalResults/FinalResults";
 import Question from "./Components/Question/Question";
 import Randomizer1 from "./Components/Randomizer1/Randomizer1";
@@ -56,6 +57,10 @@ class App extends Component {
             />
             <Route
               path="/round"
+              render={props => <RoundNumber {...this.props} />}
+            />
+            <Route
+              path="/result"
               render={props => <RoundResults {...this.props} />}
             />
             <Route
