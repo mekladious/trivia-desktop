@@ -36,8 +36,8 @@ class GameSettings extends React.Component {
     this.setState({ teams_num: value, teams: teams });
   }
 
-  start_game = () => {
-    if (this.state.teams.some(item => "" == item.name)) return;
+  start_game () {
+    if (this.state.teams.some(item => "" === item.name)) return;
     localStorage.setItem("teams_count", this.state.teams_num);
     localStorage.setItem("current_team", 1);
     localStorage.setItem("rounds_count", this.state.rounds_num);
@@ -47,11 +47,14 @@ class GameSettings extends React.Component {
       localStorage.setItem(team.name + "_score", 0);
       localStorage.setItem(team.name + "_streak", 0);
     });
-    this.props.load_questions();
-    // this.props.history.push(`/round`);
+    console.log("here")
+    // this.props.load_questions();
+    // this.props.history.push('/round');
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+
+  }
 
   render() {
     return (

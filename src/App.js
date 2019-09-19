@@ -3,8 +3,8 @@ import React, { Component } from "react";
 // import PageTransition from 'react-router-page-transition';
 import { Switch, Route, BrowserRouter, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import readXlsxFile from "read-excel-file";
-import { csv } from "d3-request";
+import * as d3 from 'd3';
+import csvdata from './Questions/Science_questions.csv';
 
 import GameSettings from "./Components/GameSettings/GameSettings";
 import RoundResults from "./Components/RoundResults/RoundResults";
@@ -22,9 +22,11 @@ import "./App.css";
 import { createBrowserHistory } from "history"; // you need to install this package
 let history = createBrowserHistory();
 
+
 class App extends Component {
   constructor() {
     super();
+    // this.componentWillMount = this.componentWillMount.bind(this);
     this.state = {
       history: history,
       categories: [
@@ -44,8 +46,19 @@ class App extends Component {
         { id: 5, img: require("./img/medicine.png"), label: "Medicine" },
         { id: 6, img: require("./img/music.png"), label: "Music" },
         { id: 7, img: require("./img/intel.png"), label: "Intelligence" }
-      ]
+      ],
+      questions:[]
     };
+  }
+
+  componentDidMount() {
+    let thisState = this.state;
+    let thisCmp = this;
+    d3.csv(csvdata, function(data) {
+      let questions = thisState.questions;
+      questions.push(data);
+      thisCmp.setState({ questions: questions },()=> console.log(thisCmp.state));
+    });
   }
 
   get_current_round = () => {
@@ -67,10 +80,6 @@ class App extends Component {
   };
 
   load_questions = () => {
-    csv("Questions⁩/Science_questions.csv", function(error, data) {
-      if (error) throw error;
-      console.log(data);
-    });
   };
 
   render() {
@@ -84,7 +93,7 @@ class App extends Component {
                 <GameSettings
                   {...this.props}
                   load_questions={this.load_questions}
-                />
+                /> 
               )}
             />
             <Route
