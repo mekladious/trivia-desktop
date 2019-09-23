@@ -41,16 +41,14 @@ class Randomizer2 extends React.Component {
   }
 
   displayResult(spinResult) {
-    let category = "";
-    if (spinResult.includes("sport")) category = "sports";
-    if (spinResult.includes("science")) category = "science";
-    if (spinResult.includes("history")) category = "history";
-    if (spinResult.includes("medicine")) category = "medicine";
-    if (spinResult.includes("world")) category = "world";
-    if (spinResult.includes("intel")) category = "intelligence";
-    if (spinResult.includes("music")) category = "music";
-    localStorage.setItem("current_category", category);
+    localStorage.setItem(
+      "current_category",
+      this.props.get_category(spinResult)
+    );
     return <img src={`${spinResult}`} alt={"result"} />;
+    setTimeout(() => {
+      this.props.history.push(`/question`);
+    }, 3000);
   }
 
   render() {

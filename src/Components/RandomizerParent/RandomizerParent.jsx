@@ -15,11 +15,17 @@ class RandomizerParent extends React.Component {
       randomizer: Math.floor(Math.random() * 4),
       randomizer_list: [
         // <Randomizer1 {...this.props} />,
-        <Randomizer2 {...this.props} />,
+        <Randomizer2
+          {...this.props}
+          get_category={this.get_category_from_img_url}
+        />,
         <Randomizer3 {...this.props} />,
         // <Randomizer4 {...this.props} />,
         <Randomizer5 {...this.props} />,
-        <Randomizer6 {...this.props} />
+        <Randomizer6
+          {...this.props}
+          get_category={this.get_category_from_img_url}
+        />
       ]
     };
   }
@@ -35,6 +41,18 @@ class RandomizerParent extends React.Component {
         ? 0
         : randomizer + 1
       : randomizer;
+  };
+
+  get_category_from_img_url = url => {
+    let category = "";
+    if (url.includes("sport")) category = "sports";
+    if (url.includes("science")) category = "science";
+    if (url.includes("history")) category = "history";
+    if (url.includes("medicine")) category = "medicine";
+    if (url.includes("world")) category = "world";
+    if (url.includes("intel")) category = "intelligence";
+    if (url.includes("music")) category = "music";
+    return category;
   };
 
   render() {

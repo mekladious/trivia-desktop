@@ -5,6 +5,8 @@ import Countdown from "react-countdown-now";
 import Timer from "../Timer/Timer";
 import Randomizer from "react-randomizer";
 import { Redirect } from "react-router-dom";
+import * as d3 from "d3";
+import sciencecsvdata from "./../../Questions/Science_questions.csv";
 
 class Question extends React.Component {
   constructor(props) {
@@ -29,13 +31,15 @@ class Question extends React.Component {
         require("../../aud/wrong1.mp3"),
         require("../../aud/wrong2.wav"),
         require("../../aud/wrong3.mp3")
-      ]
+      ],
+      question: {}
     };
   }
 
   countdown_audio;
 
   componentDidMount() {
+    this.choose_question();
     let round_number = this.props.get_current_round();
     let name = this.props.get_current_team().name;
     let score = this.props.get_team_score(name);
@@ -43,6 +47,16 @@ class Question extends React.Component {
     this.setState({ round_number, current_team });
     this.timer = setInterval(this.tick, 1000);
     this.play_countdown_music();
+  }
+
+  choose_question() {
+    let question_index = Randomizer.randomNumber(
+      0,
+      this.props.questions.length - 1
+    );
+    let question = questions[question_index];
+    console.log(question_index);
+    this.setState({ question });
   }
 
   play_countdown_music() {

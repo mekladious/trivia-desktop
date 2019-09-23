@@ -33,6 +33,17 @@ class Randomizer6 extends React.Component {
     }
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      var img = document.getElementsByClassName("RandomItem__img");
+      localStorage.setItem(
+        "current_category",
+        this.props.get_category(img[0].src)
+      );
+      this.props.history.push(`/question`);
+    }, 10000);
+  }
+
   render() {
     const { imagesReady } = this.state;
     return (

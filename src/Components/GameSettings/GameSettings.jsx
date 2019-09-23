@@ -3,6 +3,8 @@ import { withRouter, Link, Redirect } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
+import * as d3 from "d3";
+import sciencecsvdata from "./../../Questions/Science_questions.csv";
 
 class GameSettings extends React.Component {
   constructor() {
@@ -37,7 +39,7 @@ class GameSettings extends React.Component {
   }
 
   start_game = () => {
-    if (this.state.teams.some(item => "" == item.name)) return;
+    if (this.state.teams.some(item => "" === item.name)) return;
     localStorage.setItem("teams_count", this.state.teams_num);
     localStorage.setItem("current_team", 1);
     localStorage.setItem("rounds_count", this.state.rounds_num);
@@ -47,11 +49,27 @@ class GameSettings extends React.Component {
       localStorage.setItem(team.name + "_score", 0);
       localStorage.setItem(team.name + "_streak", 0);
     });
-    this.props.load_questions();
-    // this.props.history.push(`/round`);
+    localStorage.setItem("active_game", "true");
+    this.load_questions();
+    // this.props.history.push("/round");
   };
 
-  componentDidMount() {}
+  load_questions = () => {
+    let science_questions = [];
+    d3.csv(sciencecsvdata, function(data) {
+      science_questions.push(data);
+    }).then(() => {
+      let science_questions_tracker = new Array(science_questions.length);
+      for (let i = 0; i < science_questions_tracker.length; i++) {
+        science_questions_tracker[i] = i + 1;
+      }
+      localStorage.setItem("science", science_questions_tracker);
+    });
+  };
+
+  componentDidMount() {
+    localStorage.setItem("active_game", "false");
+  }
 
   render() {
     return (
@@ -148,13 +166,13 @@ class GameSettings extends React.Component {
                 <div className="col-4" />
                 <div className="col-4">
                   <div className="start-game-button">
-                    <Link
+                    <Button
                       className="white-button"
                       variant="primary"
                       onClick={this.start_game}
                     >
                       START GAME
-                    </Link>
+                    </Button>
                   </div>
                 </div>
               </div>

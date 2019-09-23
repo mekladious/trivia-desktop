@@ -3,7 +3,8 @@ import React, { Component } from "react";
 // import PageTransition from 'react-router-page-transition';
 import { Switch, Route, BrowserRouter, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { csv } from "d3-request";
+import * as d3 from "d3";
+import csvdata from "./Questions/Science_questions.csv";
 
 import GameSettings from "./Components/GameSettings/GameSettings";
 import RoundResults from "./Components/RoundResults/RoundResults";
@@ -24,6 +25,7 @@ let history = createBrowserHistory();
 class App extends Component {
   constructor() {
     super();
+    // this.componentWillMount = this.componentWillMount.bind(this);
     this.state = {
       history: history,
       categories: [
@@ -43,8 +45,20 @@ class App extends Component {
         { id: 5, img: require("./img/medicine.png"), label: "Medicine" },
         { id: 6, img: require("./img/music.png"), label: "Music" },
         { id: 7, img: require("./img/intel.png"), label: "Intelligence" }
-      ]
+      ],
+      questions: []
     };
+  }
+
+  componentDidMount() {
+    let thisState = this.state;
+    let thisCmp = this;
+    d3.csv(csvdata, function(data) {
+      let questions = thisState.questions;
+      console.log(data);
+      questions.push(data);
+      thisCmp.setState({ questions: questions });
+    });
   }
 
   get_current_round = () => {
@@ -65,13 +79,6 @@ class App extends Component {
     return parseInt(localStorage.setItem(name + "_streak", 0));
   };
 
-  load_questions = () => {
-    csv("Questions⁩/Science_questions.csv", function(error, data) {
-      if (error) throw error;
-      console.log(data);
-    });
-  };
-
   render() {
     return (
       <div className="App">
@@ -82,7 +89,7 @@ class App extends Component {
               render={props => (
                 <GameSettings
                   {...this.props}
-                  load_questions={this.load_questions}
+                  questions={this.state.questions}
                 />
               )}
             />
@@ -109,6 +116,7 @@ class App extends Component {
               render={props => (
                 <Question
                   {...this.props}
+                  questions={this.state.questions}
                   get_current_round={this.get_current_round}
                   get_current_team={this.get_current_team}
                   get_team_score={this.get_team_score}
