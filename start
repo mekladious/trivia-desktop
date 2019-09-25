@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd /Users/Abdullrahman/reactapps/trivia-desktop/
+cd /Applications/trivia-desktop/
 
 forever start -c "npm start" ./
