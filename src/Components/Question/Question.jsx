@@ -43,6 +43,11 @@ class Question extends React.Component {
   correct_audio;
   incorrect_audio;
 
+  componentWillMount() {
+    if (localStorage.getItem("active_game") == "false")
+      this.props.history.push(`/settings`);
+  }
+
   componentDidMount() {
     this.choose_question();
     let round_number = this.props.get_current_round();

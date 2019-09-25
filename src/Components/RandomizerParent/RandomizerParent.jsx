@@ -29,6 +29,12 @@ class RandomizerParent extends React.Component {
       ]
     };
   }
+
+  componentWillMount() {
+    if (localStorage.getItem("active_game") == "false")
+      this.props.history.push(`/settings`);
+  }
+
   get_randomizer_number = () => {
     let randomizer = this.state.randomizer;
     let previously_used_randomizer = localStorage.getItem(

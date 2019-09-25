@@ -16,6 +16,12 @@ class RandomizerParent extends React.Component {
       team_name: ""
     };
   }
+
+  componentWillMount() {
+    if (localStorage.getItem("active_game") == "false")
+      this.props.history.push(`/settings`);
+  }
+
   componentDidMount() {
     let round_number = this.props.get_current_round();
     let team_name = this.props.get_current_team().name;
