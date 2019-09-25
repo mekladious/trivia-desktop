@@ -7,7 +7,7 @@ class Randomizer3 extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      max: 12,
+      max: 7,
       min: 1
     };
     this.displayResult = this.displayResult.bind(this);
@@ -15,9 +15,7 @@ class Randomizer3 extends React.Component {
 
   displayResult(fn) {
     const rand =
-      Math.floor(Math.random() * (this.state.max - this.state.min)) +
-      this.state.min;
-    console.log("randomizer2", rand);
+      Math.floor(Math.random() * 7) + 1 ;
     let category = "";
     switch (rand) {
       case 2:
@@ -38,7 +36,7 @@ class Randomizer3 extends React.Component {
       case 7:
         category = "intelligence";
         break;
-      case (8, 9, 10):
+      case 1:
         category = "science";
         break;
     }
