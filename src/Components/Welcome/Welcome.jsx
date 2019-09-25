@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import posed from "react-pose";
 import { tween, styler, easing } from "popmotion";
 import ReactPlayer from "react-player";
+import notionvideo from "../../vid/notion_intro.mp4";
 
 const Box = posed.div({
   hidden: { opacity: 0 },
@@ -24,7 +25,8 @@ class Welcome extends React.Component {
   state = {
     boxIsVisible: false,
     contentIsVisible: false,
-    videoIsVisible: true
+    videoIsVisible: true,
+    active_game: false
   };
   audio = new Audio(require("../../aud/notion_audio.mp3"));
 
@@ -49,9 +51,15 @@ class Welcome extends React.Component {
     }, 2000);
   };
 
+  componentDidMount() {
+    let active_game = localStorage.getItem("active_game") == "true";
+    this.setState({ active_game });
+  }
+
   componentWillUnmount() {
     this.audio.pause();
   }
+
   render() {
     const { boxIsVisible } = this.state;
     const { contentIsVisible } = this.state;
@@ -65,8 +73,8 @@ class Welcome extends React.Component {
           <ReactPlayer
             id="video"
             height={"auto"}
-            width={"100%"}
-            url={require("../../vid/notion_intro.mp4")}
+            width={"112%"}
+            url={notionvideo}
             onEnded={this.onEnded}
             playing
           />
@@ -88,10 +96,23 @@ class Welcome extends React.Component {
             <div className="col-12 align-self-center">
               <p>Welcome to our Trivia Activity</p>
             </div>
+
             <div className="col-12 align-self-center">
-              <Link className="welcome-start-button" to="/settings">
-                PRESS TO START
-              </Link>
+              {!this.state.active_game && (
+                <Link className="welcome-start-button" to="/settings">
+                  PRESS TO START
+                </Link>
+              )}
+              {this.state.active_game && (
+                <div>
+                  <Link className="col-6 welcome-start-button" to="/round">
+                    RESUME GAME
+                  </Link>
+                  <Link className="col-6 welcome-start-button" to="/settings">
+                    PRESS TO START
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </Content>

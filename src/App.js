@@ -4,7 +4,13 @@ import React, { Component } from "react";
 import { Switch, Route, BrowserRouter, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import * as d3 from "d3";
-import csvdata from "./Questions/Science_questions.csv";
+import sciencecsvdata from "./Questions/Science_questions.csv";
+import musiccsvdata from "./Questions/Music_questions.csv";
+import historycsvdata from "./Questions/History_questions.csv";
+import intelcsvdata from "./Questions/IQ_questions.csv";
+import worldcsvdata from "./Questions/World_questions.csv";
+import sportscsvdata from "./Questions/Sport_questions.csv";
+import medicinecsvdata from "./Questions/Medicine_questions.csv";
 
 import GameSettings from "./Components/GameSettings/GameSettings";
 import RoundResults from "./Components/RoundResults/RoundResults";
@@ -37,6 +43,15 @@ class App extends Component {
         "Music",
         "Intelligence"
       ],
+      categories_files: [
+        { file: sciencecsvdata, category: "science" },
+        { file: musiccsvdata, category: "music" },
+        { file: worldcsvdata, category: "world" },
+        { file: historycsvdata, category: "history" },
+        { file: intelcsvdata, category: "intelligence" },
+        { file: sportscsvdata, category: "sports" },
+        { file: medicinecsvdata, category: "medicine" }
+      ],
       categoriesObj: [
         { id: 1, img: require("./img/science.png"), label: "Science" },
         { id: 2, img: require("./img/sport.png"), label: "Sports" },
@@ -45,20 +60,8 @@ class App extends Component {
         { id: 5, img: require("./img/medicine.png"), label: "Medicine" },
         { id: 6, img: require("./img/music.png"), label: "Music" },
         { id: 7, img: require("./img/intel.png"), label: "Intelligence" }
-      ],
-      questions: []
+      ]
     };
-  }
-
-  componentDidMount() {
-    let thisState = this.state;
-    let thisCmp = this;
-    d3.csv(csvdata, function(data) {
-      let questions = thisState.questions;
-      console.log(data);
-      questions.push(data);
-      thisCmp.setState({ questions: questions });
-    });
   }
 
   get_current_round = () => {
@@ -76,8 +79,20 @@ class App extends Component {
   };
 
   get_team_streak = name => {
-    return parseInt(localStorage.setItem(name + "_streak", 0));
+    return parseInt(localStorage.getItem(name + "_streak"));
   };
+
+  get_results() {
+    let team_names = JSON.parse(localStorage.getItem("teams"));
+    let result = [];
+    team_names.forEach(team => {
+      let team_name = team.name;
+      let team_score = this.get_team_score(team_name);
+      let team_streak = this.get_team_streak(team_name);
+      result.push({ name: team_name, score: team_score, streak: team_streak });
+    });
+    return result;
+  }
 
   render() {
     return (
@@ -89,7 +104,7 @@ class App extends Component {
               render={props => (
                 <GameSettings
                   {...this.props}
-                  questions={this.state.questions}
+                  categories_files={this.state.categories_files}
                 />
               )}
             />
@@ -105,11 +120,26 @@ class App extends Component {
             />
             <Route
               path="/result"
-              render={props => <RoundResults {...this.props} />}
+              render={props => (
+                <RoundResults
+                  {...this.props}
+                  get_current_round={this.get_current_round}
+                  get_team_score={this.get_team_score}
+                  get_team_streak={this.get_team_streak}
+                  get_results={this.get_results}
+                />
+              )}
             />
             <Route
               path="/final"
-              render={props => <FinalResults {...this.props} />}
+              render={props => (
+                <FinalResults
+                  {...this.props}
+                  get_team_score={this.get_team_score}
+                  get_team_streak={this.get_team_streak}
+                  get_results={this.get_results}
+                />
+              )}
             />
             <Route
               path="/question"
@@ -121,6 +151,7 @@ class App extends Component {
                   get_current_team={this.get_current_team}
                   get_team_score={this.get_team_score}
                   get_team_streak={this.get_team_streak}
+                  categories_files={this.state.categories_files}
                 />
               )}
             />

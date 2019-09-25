@@ -8,7 +8,7 @@ class Randomizer5 extends React.Component {
     let category = this.props.categories[
       Math.floor(Math.random() * this.props.categories.length)
     ];
-    localStorage.setItem("current_category", category);
+    localStorage.setItem("current_category", category.toLowerCase());
     return category;
   };
 

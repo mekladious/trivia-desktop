@@ -20,20 +20,36 @@ const Circle = posed.div({
 
 class FinalResults extends React.Component {
   state = {
-    circleIsSmall: false
+    circleIsSmall: false,
+    winner: ""
   };
 
+  winner_audio;
+
   componentDidMount() {
+    let scores = this.props.get_results();
+    scores.sort(function(a, b) {
+      return parseFloat(b.score) - parseFloat(a.score);
+    });
+    if (scores.length == 1 || scores[0].score == scores[1].score)
+      this.props.history.push("/result");
+    let winner = scores[0].name;
+    this.setState({ winner });
+
     setInterval(() => {
       this.setState({ circleIsSmall: !this.state.circleIsSmall });
     }, 200);
-    let audio = new Audio(require("../../aud/winner.mp3"));
-    console.log(audio);
-    audio.play();
-    audio.onended = () => {
-      this.props.history.push("goodbye");
+    this.winner_audio = new Audio(require("../../aud/winner.mp3"));
+    this.winner_audio.play();
+    this.winner_audio.onended = () => {
+      this.props.history.push("/result");
     };
   }
+
+  componentWillUnmount() {
+    if (this.winner_audio != undefined) this.winner_audio.pause();
+  }
+
   render() {
     const { circleIsSmall } = this.state;
     return (
@@ -59,7 +75,7 @@ class FinalResults extends React.Component {
                     id="circle"
                     pose={circleIsSmall ? "small" : "large"}
                   >
-                    <p className="winner-name">Warriors</p>
+                    <p className="winner-name">{this.state.winner}</p>
                   </Circle>
                 </div>
               </div>

@@ -34,7 +34,6 @@ class RandomizerParent extends React.Component {
     let previously_used_randomizer = localStorage.getItem(
       "previously_used_randomizer"
     );
-    console.log(randomizer, previously_used_randomizer);
     localStorage.setItem("previously_used_randomizer", randomizer);
     return randomizer == previously_used_randomizer
       ? randomizer === 3

@@ -1,10 +1,10 @@
 import React from "react";
 import { withRouter, Link, Redirect } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
 import { RadioGroup, RadioButton } from "react-radio-buttons";
+import ReactPlayer from "react-player";
 import * as d3 from "d3";
-import sciencecsvdata from "./../../Questions/Science_questions.csv";
 
 class GameSettings extends React.Component {
   constructor() {
@@ -16,7 +16,8 @@ class GameSettings extends React.Component {
       teams_num: 1,
       rounds_num: 1,
       teams: [{ name: "" }],
-      allFieldsValid: false
+      allFieldsValid: false,
+      show_demo: false
     };
   }
   onTeamNameChange(event, index) {
@@ -38,7 +39,7 @@ class GameSettings extends React.Component {
     this.setState({ teams_num: value, teams: teams });
   }
 
-  start_game = () => {
+  start_game() {
     if (this.state.teams.some(item => "" === item.name)) return;
     localStorage.setItem("teams_count", this.state.teams_num);
     localStorage.setItem("current_team", 1);
@@ -51,21 +52,37 @@ class GameSettings extends React.Component {
     });
     localStorage.setItem("active_game", "true");
     this.load_questions();
-    // this.props.history.push("/round");
-  };
+    this.props.history.push("/round");
+  }
 
   load_questions = () => {
-    let science_questions = [];
-    d3.csv(sciencecsvdata, function(data) {
-      science_questions.push(data);
-    }).then(() => {
-      let science_questions_tracker = new Array(science_questions.length);
-      for (let i = 0; i < science_questions_tracker.length; i++) {
-        science_questions_tracker[i] = i + 1;
-      }
-      localStorage.setItem("science", science_questions_tracker);
+    this.props.categories_files.forEach(item => {
+      this.load_category(item.file, item.category);
     });
   };
+
+  load_category = (file, category) => {
+    let questions = [];
+    d3.csv(file, function(data) {
+      questions.push(data);
+    }).then(() => {
+      let questions_tracker = new Array(questions.length);
+      for (let i = 0; i < questions_tracker.length; i++) {
+        questions_tracker[i] = i + 1;
+      }
+      console.log(category, questions_tracker.length);
+      localStorage.setItem(category, questions_tracker);
+      localStorage.setItem(category + "_available", questions_tracker.length);
+    });
+  };
+
+  open_demo() {
+    this.setState({ show_demo: true });
+  }
+
+  close_demo() {
+    this.setState({ show_demo: false });
+  }
 
   componentDidMount() {
     localStorage.setItem("active_game", "false");
@@ -74,6 +91,26 @@ class GameSettings extends React.Component {
   render() {
     return (
       <div className="container">
+        <Modal
+          id="video-modal"
+          size="lg"
+          show={this.state.show_demo}
+          onHide={() => this.close_demo()}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>DEMO</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ReactPlayer
+              id="video"
+              height={"auto"}
+              width={"100%"}
+              controls
+              url={require("../../vid/game_demo.mp4")}
+            />
+          </Modal.Body>
+        </Modal>
         <div className="row padded-row">
           <div className="col-4">
             <img
@@ -158,7 +195,11 @@ class GameSettings extends React.Component {
               <div className="row">
                 <div className="col-4">
                   <div className="demo-button white-button">
-                    <Link className="white-button" variant="primary" to="/rand">
+                    <Link
+                      className="white-button"
+                      variant="primary"
+                      onClick={() => this.open_demo()}
+                    >
                       DEMO
                     </Link>
                   </div>
@@ -166,13 +207,13 @@ class GameSettings extends React.Component {
                 <div className="col-4" />
                 <div className="col-4">
                   <div className="start-game-button">
-                    <Button
+                    <Link
                       className="white-button"
                       variant="primary"
-                      onClick={this.start_game}
+                      onClick={() => this.start_game()}
                     >
                       START GAME
-                    </Button>
+                    </Link>
                   </div>
                 </div>
               </div>

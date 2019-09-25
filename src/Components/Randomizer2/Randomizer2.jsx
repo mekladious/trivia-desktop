@@ -46,14 +46,12 @@ class Randomizer2 extends React.Component {
       this.props.get_category(spinResult)
     );
     return <img src={`${spinResult}`} alt={"result"} />;
-    setTimeout(() => {
-      this.props.history.push(`/question`);
-    }, 3000);
   }
 
   render() {
     return (
       <SpinningWheel
+        {...this.props}
         sources={this.state.wheelOptions}
         displayResult={this.displayResult}
         backgroundColor={"#BF1E2D"}

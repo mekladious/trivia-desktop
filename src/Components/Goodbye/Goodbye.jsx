@@ -27,7 +27,11 @@ class Goodbye extends React.Component {
     videoIsVisible: true
   };
 
+  audio = new Audio(require("../../aud/notion_audio.mp3"));
+
   onEnded = () => {
+    this.audio.loop = true;
+    this.audio.play();
     this.setState({ videoIsVisible: !this.state.videoIsVisible });
     setTimeout(() => {
       this.setState({ boxIsVisible: !this.state.boxIsVisible });
@@ -45,6 +49,11 @@ class Goodbye extends React.Component {
       }, 3000);
     }, 2000);
   };
+
+  componentWillUnmount() {
+    this.audio.pause();
+  }
+
   render() {
     const { boxIsVisible } = this.state;
     const { contentIsVisible } = this.state;
@@ -58,7 +67,7 @@ class Goodbye extends React.Component {
           <ReactPlayer
             id="video"
             height={"auto"}
-            width={"100%"}
+            width={"112%"}
             url={require("../../vid/notion_intro.mp4")}
             onEnded={this.onEnded}
             playing

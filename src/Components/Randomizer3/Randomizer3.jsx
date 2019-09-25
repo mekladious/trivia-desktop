@@ -43,9 +43,10 @@ class Randomizer3 extends React.Component {
         break;
     }
     localStorage.setItem("current_category", category);
+    console.log("start");
     setTimeout(() => {
       this.props.history.push(`/question`);
-    }, 3000);
+    }, 8000);
     fn({ data: rand });
   }
 
