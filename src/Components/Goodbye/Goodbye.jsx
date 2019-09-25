@@ -71,6 +71,7 @@ class Goodbye extends React.Component {
             url={require("../../vid/notion_intro.mp4")}
             onEnded={this.onEnded}
             playing
+            controls
           />
         </Videodiv>
         <Box id="box" pose={boxIsVisible ? "visible" : "hidden"}>

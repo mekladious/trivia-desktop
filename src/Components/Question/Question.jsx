@@ -18,7 +18,7 @@ class Question extends React.Component {
         name: "",
         score: 0
       },
-      countdown_seconds: 10,
+      countdown_seconds: 60,
       next_question_available: false,
       no_answer_music_plays: 0,
       disable_answers: "",

@@ -77,6 +77,7 @@ class Welcome extends React.Component {
             url={notionvideo}
             onEnded={this.onEnded}
             playing
+            controls
           />
         </Videodiv>
         <Box id="box" pose={boxIsVisible ? "visible" : "hidden"}>
