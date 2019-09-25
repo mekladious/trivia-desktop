@@ -76,7 +76,6 @@ class Welcome extends React.Component {
             width={"112%"}
             url={notionvideo}
             onEnded={this.onEnded}
-            playing
             controls
           />
         </Videodiv>
