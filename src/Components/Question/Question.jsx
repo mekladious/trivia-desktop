@@ -34,7 +34,17 @@ class Question extends React.Component {
         require("../../aud/wrong3.mp3")
       ],
       question: {},
-      answers_check: {}
+      answers_check: {},
+      cateogries_images: [
+        { img: require("../../img/science.png"), label: "science" },
+        { img: require("../../img/sport.png"), label: "sports" },
+        { img: require("../../img/world.png"), label: "world" },
+        { img: require("../../img/history.png"), label: "history" },
+        { img: require("../../img/medicine.png"), label: "medicine" },
+        { img: require("../../img/music.png"), label: "music" },
+        { img: require("../../img/intel.png"), label: "intelligence" }
+      ],
+      category_image: ""
     };
   }
 
@@ -49,6 +59,7 @@ class Question extends React.Component {
   }
 
   componentDidMount() {
+    this.set_category_icon();
     this.choose_question();
     let round_number = this.props.get_current_round();
     let name = this.props.get_current_team().name;
@@ -57,6 +68,13 @@ class Question extends React.Component {
     this.setState({ round_number, current_team });
     this.timer = setInterval(this.tick, 1000);
     this.play_countdown_music();
+  }
+
+  set_category_icon() {
+    let category = localStorage.getItem("current_category");
+    this.state.cateogries_images.forEach(item => {
+      if (item.label == category) this.setState({ category_image: item.img });
+    });
   }
 
   choose_question() {
@@ -279,7 +297,7 @@ class Question extends React.Component {
                 <img
                   className="category-icon"
                   alt=""
-                  src={require("../../img/worldw.png")}
+                  src={this.state.category_image}
                 />
               </div>
               <div className="col-3 next-button">
